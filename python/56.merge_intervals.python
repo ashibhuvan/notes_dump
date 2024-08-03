@@ -1,0 +1,23 @@
+class Solution:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+
+        merged_intervals = []
+        intervals = sorted(intervals, key = lambda x: x[0])
+
+        for idx, v in enumerate(intervals):
+            if len(merged_intervals) == 0:
+                merged_intervals.append(v)
+                continue
+
+            merged = False
+            for j in range(len(merged_intervals) - 1, -1, -1):
+                jval = merged_intervals[j]
+                if jval[0] <= v[1] and v[0] <= jval[1]:
+                    jval[0] = min(jval[0], v[0])
+                    jval[1] = max(jval[1], v[1])
+                    merged = True
+                    break
+            if not merged:
+                merged_intervals.append(v)
+
+        return merged_intervals

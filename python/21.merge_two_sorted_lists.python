@@ -1,0 +1,49 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def mergeTwoLists(
+        self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+
+        # edge cases
+        if not list1 and not list2:
+            return None
+        if list1 and not list2:
+            return list1
+        if list2 and not list1:
+            return list2
+
+        # pick head
+        head = list1
+        child = list2
+        if list2.val < head:
+            head = list2
+            child = list1
+
+
+        # start splicing
+        # either you can go to the next node or you can splice on the second node. i think we need another pointer
+        rval = head
+        while head:
+            # if head.next --> there are 2 values to compare lolz
+            if head.next:
+                if head.next.val <= child.val:
+                    head = head.next
+                    continue
+                else:
+                    # we need to splice
+                    copy_of_child = child
+                    child = child.next
+                    copy_of_head_next = head.next
+                    head.next = copy_of_child
+                    head = head.next
+                    head.next = copy_of_head_next
+                    continue
+            else:
+                if child:
+                    head.next = child
+                    head = head.next
+                return rval
+        return rval
