@@ -1,4 +1,4 @@
-theres no reason for this
+this is not 50 commands
 
 git config
 git init
