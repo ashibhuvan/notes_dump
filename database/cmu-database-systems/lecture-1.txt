@@ -99,6 +99,21 @@ if you want to find a similar word, you can easily look up similar words because
 Also has use in timeseries data
 
 
+Conflict Free Replicated Data Types (CRDT)
+problem: we want a distributed data structure that allows local updates to be made independently and the state eventuall converge
+
+Imagine you are trying to bookmark a twitter post and you dont have internet. Your copy of bookmarks is stored ontwitter servers and when you try to bookmark the post you get a connection area. The problem set is being able to save that bookmark to a local copy and eventually converge with your server copy of bookmarks.
+
+If you add to the local copy of bookmarks you may have n+1 or n+2 copies, with a CRDT you can have that information merged with the server version of your bookmarks once you get internet connection. That is possible with CRDTs
+
+Another example is bunch of users liking a post. Each user has the post with who liked it. There is a server that holds the post with who liked it. Multiple users are liking the post at once, each user may send the post with the likes + the like they added. All those copies need to converge completely. It seems simple but imagine likes and unlikes are occuring at the same time. You need to converge accurately into a global correct list of likes on a post.
+
+
+Eseentialy the solution is to think about the amount of likes as operations such as increment/decrement
+
+
+
+
 
 
 
