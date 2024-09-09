@@ -1,0 +1,52 @@
+Basic Index
+
+Employees(EmployeeId, Name, Email, Department)
+
+Here EmployeeId is the primary key and therefore a clustered index is created. This means Employees is sorted by EmployeeId and is sorted
+in a series of data pages and stored in a tree like structure.
+
+		IndexRows
+		/	\
+	Index Rows - Index Rows - Index Rows
+	/	\    /        \   /        \
+Data Rows      DR    DR       DR  DR       DR
+
+The data pages or leaf nodes contain employee data rows
+
+- Lets say 1200 rows in the table, each data page has 200 rows of data
+
+The employee rows are sorted by the EmployeeId column because EmployeeId is the primary key and by default a clustered index on this column is created
+Each index row contains a key value and a pointer to either an intermediate level page or a B-tree or a data row in the leaf node
+
+Lets say you want to find an employee row with EmployeeId = 1120
+The root node has information its right most child node has information on EmployeeIds rom 801- 1200. It will then look at that node
+The child node has more information that its most right leaf node has data base nodes from 1001 to 1200. Then that data page will be loaded.
+The data page is sorted and is then easy to find the row with employeeId 1120.
+
+There can only be one clustered index per table since the data can only be sorted in one order
+
+	Clustered Index Scan
+This example was simple because the data was already sorted by EmployeeId. What if we want to search by employee name?
+Because there is no index, SQL has to read every record in the table which is ineffecient
+This is called Index Scan and has very bad performance.
+
+	Non Clustered Index (SQL Server)
+- A non clustered index creates a separate structure for indexing data but does not affect the physical order of data in the table
+- Table data is stored normally and non-clustered index contains a pointer to the actual rows. Multiple non-clustered indexes can exist for a table
+
+Say you create a non-clustered index on Employees Name
+In a non-clustered index we do not have table data, we have key values and row locators
+Alexa - EmployeeId(821)
+Name2 - EmployeeId(31)
+
+The key is the column we are indexing and the value is the row location which is determined by the clustered index
+
+		Key Values
+		/	\
+	Key Values	Key Values
+	/	\	/	\
+Row Locators	RL	RL	RL
+
+We create a non-clustered index on the name column so the key values are stored and sorted in alphabetical order
+The row locators at the bottom of the tree contain Employee Name and cluster key of the row.
+

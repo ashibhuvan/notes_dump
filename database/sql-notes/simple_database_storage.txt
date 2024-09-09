@@ -1,0 +1,70 @@
+How Data Stored in SQL Database - Simple Overview
+
+Topics
+1. Data Pages
+2. Root Nodes
+3. Leaf Nodes
+4. B Tree
+5. Clustered Index Structure
+
+
+Data in tables is stored in row and column format at the logical level but at the physical level data is stored in data pages.
+A data page is the fundamental unit of data storage in SQL server and it is 8KB in size. Any data inserted to SQL Server database table is stored
+in a series of 8 KB data pages
+
+[Data Page] -> <- [Data Page] -> <- [Data Page]
+	
+	Tree Like Structure
+Table data in SQL Server is stored in a tree like structure. Take an example like Employees(EmployeeId, Name, Email, Department)
+EmployeeId is the primary key column. By default a clustered index on EmployeeId column is created
+This means the data is physically stored sorted by EmployeeId column.
+
+	Where the Data is Actually Stored
+
+The data is stored in a series of data pages in a tree like structure. The tree like structure is a B tree, index B-tree, or clustered index structure
+There will be a root node that contains index rows information, intermediary levels that contain more index row information, and finally leaf nodes
+The leaf nodes are the actual data pages that contain a fixed set of rows.
+
+The size of each data page is 8kb so the number of rows that are stored in each data page depends on the size of each row.
+
+	Heap Table
+
+Without a clustered index, data rows are not gaurunteed to be in any specific order in the table. This kind of table is called a
+heap. It may have one or more non-clustered indexes but if it doesnt have a clustere index, that such table is called a heap table or heap
+
+This means the data is not physically ordered in any way. A table without a clustered index is called a heap.
+
+If there are no non-clustered indexes on the heap, the search query uses Table Scan to find the data we are looking for.
+Table scan means to scan every row in the table to find the row we are looking for.
+
+1. Table scan is used if there are no indexes to help a query that selects data from a table heap
+2. Table scan is not always bad from performance standpoint, especially if you have table with a few rows
+3. Even if there is an index on a small table, SQL server may still use table scan because it might have better performance than using index sca	Heap Table
+Without a clustered index, data rows are not gaurunteed to be in any specific order in the table. This kind of table is called a
+heap. It may have one or more non-clustered indexes but if it doesnt have a clustere index, that such table is called a heap table or heap
+
+This means the data is not physically ordered in any way. A table without a clustered index is called a heap.
+
+If there are no non-clustered indexes on the heap, the search query uses Table Scan to find the data we are looking for.
+Table scan means to scan every row in the table to find the row we are looking for.
+
+1. Table scan is used if there are no indexes to help a query that selects data from a table heap
+2. Table scan is not always bad from performance standpoint, especially if you have table with a few rows
+3. Even if there is an index on a small table, SQL server may still use table scan because it might have better performance than using index scan.
+
+	How Data Rows are Stored in the Heap
+
+1. Data is initially stored in the order in which the rows are inserted into the heap table
+2. Database Engines can move data around in the heap to store rows effeciently so order of data rows in a heap cannot be predicted
+3. To gaurantee the order of the rows returned from a heap, you must use ORDER BY clause in the query
+
+
+To Create a Heap: create a table without a clustered index or if the table has a clustered index, drop it
+To Remove a Heap: create a clustered index on the heap
+
+	When to use a Heap
+1. Heap can be used as a staging table for large and unordered insert operations. Because data is inserted without enforcing a strict order
+   the insert operation is usually faster than inserting into a table with a clustered index.
+2. Table is small with just a few rows
+3. Data is always accessed through nonclustered indexes.
+
