@@ -1,0 +1,108 @@
+	SQL Important Concepts - Part 2
+Constraints - rules you can apply on the type of data in a table. Specify the limit on the type of data that can be stored in a particular column
+
+SQL Constraints
+
+1. NOT NULL : cannot store a null value in the column
+2. UNIQUE : all values in the column must be unique.
+3. PRIMARY KEY : A primary key is a field which can unique identiy each row in a table
+4. FOREIGN KEY : foreign key is a field which can unique identify each row in another table.
+5. CHECK : helps validate the values of a column to meet a condition
+6. DEFAULT : specifies a default value when no value is specified by the user
+
+CREATE TABLE table_name (
+	column1 data_type(size) constraint name
+);
+
+CREATE TABLE Student (
+	ID int(6) NOT NULL UNIQUE,
+	NAME char(10) NOT NULL,
+	ADDRESS varchar(20) NOT NULL UNIQUE,
+	PRIMARY KEY(ID),
+	FOREIGN KEY (ADDRESS) REFERENCES Addresses(ADDRESS_ID),
+	AGE int NOT NULL CHECK (AGE > 14)
+);
+ -- single line comment
+ -- another comment
+ /* Multi
+ Line
+ Comment */
+
+GROUP BY: group by is used to arrange identical data into groups into groups. If a particular column has same values in different rows, arrange these rows ina  group
+
+GROUP BY is used with SELECT statement.
+Placed after WHERE clause, placed before ORDER BY clause
+
+GROUP BY multiple columns will place all rows with same values of both the columns in one group
+
+# HAVING clause
+can use HAVING clause to place conditions to decide which group will be the part of final result-set. 
+It is like where condition for group by
+
+SELECT NAME, SUM(SALARY) FROM EMPLOYEE
+GROUP BY NAME
+HAVING SUM(SALARY) > 3000;
+
+
+	VIEWS
+
+views in SQL are like a virtual table. A view also has rows and columns as if they are in a real table in the database. 
+Can create a view by selecting fields from one or more tables. Views are usually read only and pull in live data.
+
+CREATE VIEW view_name AS
+SELECT col1, col2..
+FROM Table
+WHERE ...
+
+- Delete view with:
+DROP VIEW view_name;
+
+Views Uses
+1. Restrict data access, additional level of table security
+2. Hides data complexity (if you are using something like multiple table joints)
+3. Simplify commands for the user, select information from multiple tables without requiring the user to actually know how to perform a join
+4. Store complex queries
+5. Rename columns  without affecting the base tables
+6. Multiple view facility
+
+	FUNCTIONS ( AGGREGATE AND SCALAR FUNCTIONS)
+
+Aggregate Functions
+1. AVG()
+2. COUNT()
+3. FIRST()
+4. LAST()
+5. MAX()
+6. SUM()
+
+Scalar Functions
+1. UCASE()
+2. LCASE()
+3. MID()
+4. ROUND()
+5. NOW()
+6. FORMAT()
+
+	QUERY Processing
+- includes translations on high level Queries into low level expressions that can be used at physical level of file system, query, optimization, and actual execution of query to get the actual result
+
+Step 1. Parser: during parse call the database performs syntax check, semantic check, and shared pool check after converting the query into relational algebra
+Shared Pool Check is that every query possesses a hash code during its execution so it checks if the hash is in the shared pool and then the db does not need to take additional steps for optimization and execution
+
+Hard Parse (if no hash exists):
+
+1. Optimizer:  Parse the data manipulation language statement and generate an optimized execution plan
+It is a process in which multiple query execution plan for satisfying a query are examined and most efficient query plan is satisfied for execution
+
+
+Row Source Generation
+
+- Software that recieves an optimal execution plan from the optimizer and produces an iterative execution plan that is usable by the rest of the database.
+The iterative plan is the binary program that when executed by the sql engine produces the result set.
+
+
+WHERE clause
+- used for fetching filtered data in a result set.
+- basic conditional operators
+- between, like, in
+
