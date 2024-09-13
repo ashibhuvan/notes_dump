@@ -1,9 +1,7 @@
 public class StreamLearning {
 	public static void main(String[] args) {
-		
+	  	// Insert Test Code	
 		System.out.println("Mastering Streams");
-
-
 	}
 
 	// Getting Range of List
@@ -59,6 +57,15 @@ public class StreamLearning {
 						      .collect(Collectors.toList()).toArray();
 	}
 
+	
+
+	// Getting the Sum of List
+	public int sum(List<Integer> values) {
+		// Lambda Expression
+		return values.stream().reduce((a, b) -> a + b).get();
+		// Method Reference
+		return values.stream().reduce(Integer::sum).get();
+	}
 
 }
 
