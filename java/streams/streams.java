@@ -67,6 +67,24 @@ public class StreamLearning {
 		return values.stream().reduce(Integer::sum).get();
 	}
 
+	// Return Avg from Squares of Integers from List Whose Value is Greater than 100
+	public double avgOver100(List<Integer> values) {
+		return values.stream().map(n -> n * n).filter(n -> n >= 100).mapToInt(Integer::intValue).average().orElse(Double.Nan);
+	}
+
+	// Return the List of Even Integers and Odd Integers from the List of Integers
+	public List<List<Integer>> oddAndEven(List<Integer> values) {
+		return values.stream().collect(Collectors.partitioningBy(n -> n / 2 == 0)).values().stream().collect(Collectors.toList);
+		// Collectors.partition() returns a Map<Boolean, List>
+		// .values() gets the lists, stream them, collect them
+	}
+
+	// Return the List of Integers Whose Value Starts with 2 from the list of Integers
+	public List<Integer> greaterThanTwo(List<Integer> values) {
+
+		return values.stream().map(String::valueOf).filter(s -> s.indexOf(0).equals("2").map(Integer::valueOf).toList();
+	}
+
 }
 
 
