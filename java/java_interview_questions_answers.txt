@@ -1,0 +1,74 @@
+Some Java Interview Questions and Answers
+
+1. Java classloader is a substystem of Java Virtual Machine that loads class files when a program is sexecuted.
+2. Java has 5 types of memory allocations
+	- Class Memory
+	- Heap Memory
+	- Stack Memory
+	- Program Counter Memory
+	- Nastive Method Stack Memory
+
+3. Stack memory is fixed memory space allocated to each individual process. Heap memory is portio that was not assigned to Java code but will be
+available for use by Java code when it is required during the programs run time.
+
+4. Neither local variables nor any primitives nor object references have any default value stored in them
+5. Aggregation is whole/part and has-a relationship
+6. Copy constructor in java is a constructor that initializes an object through another object of the same class
+7. Empty interface in Java is a marker interface. Serializable and Cloneable are famous examples
+8. Object cloning is recreating an object similar to an existing object. Java has .clone() method
+9. Wrapper classes are responsible for converting them into objects (reference type)
+10. Singleton class in Java is a class that can possess only one object at a time. Have only one object in the class and give global access
+11. Instance variables are declared inside a class and scope of variables in java is limited to only a specific object
+12. Java String pool is a collection of strings in Javas heap memory. When you try to create a new string the JVM first checks for the presence of the object in the pool. If it is available a reference is used.
+13. Final exword in Java then a variables value remains constant throughout the programs execution
+14. If main method is not static the JVM needs to create an object of that class first.
+15. Exceptions are thrown from the top of the stack and then moves down the call stack to the preceding method
+16. ArrayList uses object references which are stored in contiguous memory locations while the objects themselves are not
+17. new and newInstance can create Java objects. If we know the type of object to create, we can use new. If the type is supplied at runtime, then new instance function is used.
+18. Sychronized keyword identifys sychronized blocks. It is tied to that object. Only one thread can be running at a time inside sychronized block. 
+19. Thread can be 
+	- New
+	- Active. Thread goes from New to Active when calling start()
+	- Blocked or Waiting
+	- Timed Waiting - when using sleep on a method.
+	- Termination - no longer active in the system and cannot be revived.
+
+Exceptions in Java
+
+2 types. Checked Exceptions and Unchecked Exceptions
+Checked Exceptions - exceptions that must be declared in the method signature. If the checked exception is thrown in a method the method 
+must either handle the exception or declare it be thrown. If the method does not handle the exception the compiler will generate an error
+
+Unchecked Exception - exceptions that do not need to be declared in the method signature. Unchecked exceptions can be thrown by any method and will 
+not generate an error if they are not handled.
+
+Overloading is the ability to have multiple methods with the same name but different parameters.
+Overriding is the ability to have a method in a subclass that has the same signature as a method in the super class
+
+Static Binding occurs when the compiler determines the method to be called at compile time. Most common type of binding in OOP
+Dynamic Binding occurs when the method to be called is not determined until runtime. This is used for virtual methods which allows for polymorphism
+
+Abstract classes can have abstract methods which are methods without a body. 
+Interfaces are a code contract which must be implemented by a concrete class.
+
+Collections Framework
+
+- Collection Interface
+- List Interface
+- Set Interface
+- Queue Interface
+- Deque Interface
+- Map Interface
+
+
+
+
+
+
+
+
+
+
+
+
+
