@@ -1,0 +1,30 @@
+Monotonic Function
+
+A monotonic function is a function that is either non-decreasing or non-increasing. Given x1 and x2 and x2 > x1, we will have f(x2) >= f(x1)
+A sorted array is monotonic because the value increases or stays the same as the index increases.
+
+If f(x) only contains Boolean values of True and False and we consider True to be 1 and False to be 0, then a sorted boolean array would consist of consecutive 0s and then 1s.
+
+Feasible Function:
+
+The precondition for binary search is to find a monotonic function f(x) that returns either True or False. Then the problem becomes Find the First True in a Sorted Boolean Array. 
+
+Basically you consider the feasable aspect to be something that evaluates lets say a position in an array with an element that is the first one you are looking for.
+You can then record that and continue your search. When you combine it all together you have a binary search template with a function call to feasable() that you can
+specifically design. The template looks like the follows in pythoon
+
+def binary_search(nums: List[int], target: int) -> int:
+
+	left, right = 0, len(nums) - 1
+	first_true_index = -1
+
+	while left <= right:
+		mid = (left + right) // 2
+		if feasable(mid):
+			first_true_index = mid
+			right = mid - 1
+		else:
+			left = mid + 1
+	return first_true_index
+
+

@@ -1,0 +1,22 @@
+Binary Search
+
+- an effecient array search algorithim. Works by narrowing down the search range by half each time. Intuitive approach is like looking up a word in a dictionary.
+
+Simple Example: Given a sorted array of integers and an integer called target, find the element that equals the target and return its index
+The key observation is that the array is sorted.
+
+1. Pick a random element (in our algorithims we will pick the middle of the array)
+2. If the element is smaller than the target, we know that the element cannot be found in the section LEFT of the element.
+3. If the element is larger than the target, we know that the element cannot be found in the section RIGHT of the element.
+4. From this we can chose the next section we want to repeat this process in until we find the element or we realize it is not there.
+
+The time compelxity is 0(log(N)) because we are discarding half of the available options each time we search.
+If we have 100 elements, in our first pass we divide the section into 50 elements, then 25, then 12 then 6 then 4 than 2. Which means for an array of 100 elements, we only have to search ~6 times. The log base 2 of 100 is 6.64. 2 to the power of 6.64 is around 100. Meaning
+for an array of 100 elements, we have to at most look 6.64 times. As the array grows in size, we know the time complexity for the array follows an increase of 0(log(N))
+
+Deducing Binary Search : Key Elements in Writing
+1. Make sure the while loop includes an equality comparison otherwise the loop might get skipped and miss the potential match for the edge case of a 1 element array
+
+When to Use Binary Search
+
+- Binary search works beyond sorted arrays. You can use binary search whenever you make a binary decision to reduce the search range.
