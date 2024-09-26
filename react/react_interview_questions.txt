@@ -1,0 +1,114 @@
+What is the difference between Element and Component:
+- Element is a plain object describing what you want to appear on the screen in terms of the DOM nodes or other components. Elements contain other Elements in
+their props. Creating a REACT element is cheap. Once an element is created it cannot be mutated.
+
+Without JSX-
+
+const element = React.createElement("div", {id: "login-btn"}, "Login");
+
+With JSX
+<div id="login-btn">Login</div>
+
+The above React.createElement() function returns an object as below
+
+{
+type: 'div',
+props: {
+	children: 'Login',
+	id: 'login-btn'
+}
+}
+
+Finally this element renders to the DOM using ReactDOM.render()
+
+A component can be declared in several different ways. It can be a class with a render() method or it can be defined as a function. In either case it takes pops as an input
+and returns a JSX tree as the output
+
+const Button = ({ handleLogin }) => {
+	
+	)
+
+}
+
+Props in reacts are inputs to components. They are single values or objects containing a set of values that are passed to components on creation similar to HTML tag attributes. Here the data is passed down from a parent component to a child component. The primary purpose of props in React is to provide following component functionality:
+
+1. Pass custom data to your components.
+2. Trigger state changes.
+3. Use via this.props.reactPro inside component's render() method.
+
+import React from "react";
+import ReactDOM from "react-dom";
+
+const ChildComponent = (props) => {
+  return (
+    <div>
+      <p>{props.name}</p>
+      <p>{props.age}</p>
+      <p>{props.gender}</p>
+    </div>
+  );
+};
+
+const ParentComponent = () => {
+  return (
+    <div>
+      <ChildComponent name="John" age="30" gender="male" />
+      <ChildComponent name="Mary" age="25" geneder="female" />
+    </div>
+  );
+};
+
+
+The properties from props object can be accessed directly using destructing feature from ES6. It is also possible to fallback to default value when the prop value is not specified.
+
+State and Props
+Both state and props are plain javascript objects and used to manage the data of a component, but they are used in different ways and have different characteristics. The
+state entity is managed by the component itself and can be updated using the setter(setState()) function. Unlike props state can be modified by the component and is used to manage the internal state of the component. State acts like the component's memory. Changes in the state retrigger a render of the component and it's children. The components cannot be resuable with the usage of state alone.
+
+Props are read only properties that are passed to a component by its parent component. Props can also be used to configure the behavior of a component and to pass data between components. The components become resuable with the usage of props.
+
+
+React Fiber:
+Fiber is the new reconciliation engine or reimplementation of core algorithim in React v16. The goal of React Fiber is to increase its suitability for areas like animation, layout, gestures, ability to pause, abort, or reuse work and assign priority to different types of updates; and new concurrency primitives. 
+
+The headline for react fiber is incremental rendering. The ability to split rendering work into chunks and spread it out over multple frames.
+
+Controlled components are components that control the input elements within the forms on subsequent user inputs. Every state mutation will have an associated handler function. THe displayed data is always in sync with the satte of the component.
+
+1. Initialize the state using state hooks in function components or inside contructor for class components.
+2. Set the value of the form element to the respective state variable
+3. Create an event handler to handle the user input changes through useState updater function or setState from class component.
+4. Attach the above event handler to form elements change or click events
+
+import React, { useState } from "react";
+
+function UserProfile() {
+  const [username, setUsername] = useState("");
+
+  const handleChange = (e) => {
+    setUsername(e.target.value);
+  };
+
+  return (
+    <form>
+      <label>
+        Name:
+        <input type="text" value={username} onChange={handleChange} />
+      </label>
+    </form>
+  );
+}
+
+
+Uncontrolled components are ones that store their own state internally and you query the DOM using a ref to find its current value when you need it.
+The unctrolled components can be implemented as follows:
+1. Create a ref using useRef react hook in function component or React.createRef() in class based component.
+2. Attach this ref to the form element.
+3. The form element value can be accessed directly through ref in event handlers or componentDidMount for class components
+
+Higher order component is a function that takes a component and returns a new component. Basically it is a pattern that is derived from Reacts compositional nature.
+
+Children is a prop that allows you to pass components as data to other components just like any other prop you would use. Component tree put between components opening and closing tag will be passed to that component as children prop.
+
+Reconciliation is the process through which React updates the Browser DOM and makes React work faster. React use a diffing algorithim so that component updates are predictable and faster. React would first calculate the difference between the real DOM and the copy of DOM when there's an update of components. React stores a copy of Browser DOM which is called Virtual DOM. When we make changes or add data, React creates a new Virtual DOM and compares it with the previous one. Reconciliation compares the virtual dom with the real dom and only updates the changes that are specifically needed.
+

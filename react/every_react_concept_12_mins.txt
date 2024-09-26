@@ -1,0 +1,68 @@
+1. Components:
+
+Components are the building block of every react app. They allow you to make all the visible parts parts of an app such as
+buttons, inputs, and entire pages.
+
+You can use components as many times as you want. Every react component is a javascript function that returns markup.
+
+function CoolFunction() {
+	return <button>Click Me</button>
+}
+React components don't return HTML markup. They return JSX. Unlike HTML which is static and unchanging, you can use dynamic values in JSX. You can use curly braces for this.
+
+2. Curly Braces let you insert dynamic data. 
+
+const plant = 'world'
+<div> Hello {planet} </div> Dynamic Attributes and Styling elements with Javascript objects.
+
+3. React Fragment:
+
+Javascript functions only let you return one parent element so you cant return multiple JSX tabs. You can use an empty <> which is a fragment.
+<>
+	<Header />
+	<Main />
+</>
+
+4. Props:
+
+If you want to pass data into another component you can use props. To make a prop create a name on the component you want to pass value to.
+<Greeting text={'sample text'} />
+You can then use that prop value
+
+function Greeting(props) {
+	return <h1>{props.text}</h1>
+}
+
+Props refers to properties on an object. Every object/prop has attributes.
+You can achieve composition through props and children components.
+
+5. Children:
+
+<Parent>
+<Child/>
+</Parent>
+
+function Parent(props) {
+	return <div>{props.children}</div>
+}
+
+6. Keys Props
+Used so react can tell one component apart from another. A key is a unique string or identifier. 
+
+Rendering:
+React uses the virtual dom for rendering. DOM is Document Object Model used to model the html elements on a website.
+
+Rendering Steps:
+1. If state of react app changes, react updates the virtual dom. This is quicker to update than real dom.
+2. React then uses diffing on the dom and previous dom
+3. Reconciliation -> apply the changes needed
+
+
+Event Handling
+Handles user interactions and events that occur.
+
+<button onClick={handleClick} />
+<input onChange={handleChange} />
+<form onSubmit={handleSubmit} />
+
+
